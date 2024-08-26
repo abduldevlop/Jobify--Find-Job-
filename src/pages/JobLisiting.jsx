@@ -33,7 +33,13 @@ const JobLisiting = () => {
       {loadingJobs === false && (
         <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-10">
           {dataJobs?.length ? (
-            dataJobs.map((job) => <JobCard key={job.id} job={job} />)
+            dataJobs.map((job) => (
+              <JobCard
+                key={job.id}
+                job={job}
+                saveinit={job?.saved?.length > 0}
+              />
+            ))
           ) : (
             <div>No Jobs Found 🤔</div>
           )}

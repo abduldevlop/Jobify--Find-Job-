@@ -1,5 +1,5 @@
 import { useUser } from "@clerk/clerk-react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Card,
   CardContent,
@@ -10,14 +10,38 @@ import {
 import { Heart, MapPinIcon, Trash2Icon } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
+import { saveJob } from "@/api/api-job";
+import useFetch from "@/hooks/useFetch";
 
 const JobCard = ({
   job,
-  isMyJob = true,
-  saveinit = false,
-  onJobSave = () => {},
+  savedInit = false,
+  onJobAction = () => {},
+  isMyJob = false,
 }) => {
+  const [saved, setSaved] = useState(savedInit);
   const { user } = useUser();
+
+  const {
+    loading: loadingSavedJob,
+    data: savedJob,
+    fn: fnSavedJob,
+  } = useFetch(saveJob, {
+    alredySave: saved,
+  });
+
+  const handleSaveJob = async () => {
+    await fnSavedJob({
+      user_id: user.id,
+      job_id: job.id,
+    });
+    onJobAction();
+  };
+
+  useEffect(() => {
+    if (savedJob !== undefined) setSaved(savedJob?.length > 0);
+  }, [savedJob]);
+
   return (
     <Card className="flex justify-between flex-col">
       <CardHeader>
@@ -52,7 +76,21 @@ const JobCard = ({
             More details..
           </Button>
         </Link>
-        <Heart size={20} stroke="red" fill="red" />
+        {!isMyJob && (
+          <>
+            <button
+              className="w-25 bg-transparent"
+              onClick={handleSaveJob}
+              disabled={loadingSavedJob}
+            >
+              {saved ? (
+                <Heart size={20} stroke="red" fill="red" />
+              ) : (
+                <Heart size={20} />
+              )}
+            </button>
+          </>
+        )}
       </CardFooter>
     </Card>
   );
