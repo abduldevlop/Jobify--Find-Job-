@@ -1,4 +1,4 @@
-![Home Page]("https://github.com/abduldevlop/Jobify--Find-Job-/blob/main/home.png")
+![Home Page](https://github.com/abduldevlop/Jobify--Find-Job-/blob/main/home.png)
 
 # Jobify - Find Job
 
