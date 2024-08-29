@@ -1,3 +1,5 @@
+![Home Page]("https://github.com/abduldevlop/Jobify--Find-Job-/blob/main/home.png")
+
 # Jobify - Find Job
 
 Jobify is an innovative job search platform designed to streamline the job-seeking process. Created using React, Supabase, Tailwind CSS, and Shadcn UI, Jobify offers a sleek and responsive user experience for job seekers and recruiters alike.
