@@ -81,10 +81,7 @@ const Header = () => {
           className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
           onClick={handelOverlayCLick}
         >
-          <SignIn
-            signUpForceRedirectUrl="/onboarding"
-            fallbackRedirectUrl="/onboarding"
-          />
+          <SignIn signUpForceRedirectUrl="/onboarding" />
         </div>
       )}
     </>
